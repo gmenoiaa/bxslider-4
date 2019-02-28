@@ -1168,7 +1168,12 @@
       slider.viewport.off('touchmove MSPointerMove pointermove', onTouchMove);
       slider.viewport.off('touchend MSPointerUp pointerup', onTouchEnd);
       if (slider.viewport.get(0).releasePointerCapture) {
-        slider.viewport.get(0).releasePointerCapture(slider.pointerId);
+        try {
+          slider.viewport.get(0).releasePointerCapture(slider.pointerId);
+        } catch (exception) {
+          // do not log exception to console
+          // exception is throw if pointerId is not an active pointer
+        }
       }
     };
 
@@ -1280,7 +1285,12 @@
       slider.viewport.off('touchend MSPointerUp pointerup', onTouchEnd);
 
       if (slider.viewport.get(0).releasePointerCapture) {
-        slider.viewport.get(0).releasePointerCapture(slider.pointerId);
+        try {
+          slider.viewport.get(0).releasePointerCapture(slider.pointerId);
+        } catch (exception) {
+          // do not log exception to console
+          // exception is throw if pointerId is not an active pointer
+        }
       }
       // if slider had swipe with left mouse, touch contact and pen contact
       if (slider.hasMove === false && (slider.originalClickButton === 0 || slider.originalEventType === 'touchstart')) {
